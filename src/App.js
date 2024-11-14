@@ -1,6 +1,8 @@
 import React from "react";
-import RiskForm from "./RiskAssessmentForm";
-import RiskMatrixTable from "./RiskMatrixTable";
+import RiskEvaluationPage from "./RiskEvaluationPage";
+// import RiskForm from "./RiskAssessmentForm";
+// import RiskMatrixTable from "./components/RiskMatrixTable";
+// import SystemList from "./components/SystemList";
 
 function App() {
   return (
@@ -8,9 +10,12 @@ function App() {
       <h1 className="text-center py-5 text-xl font-bold">
         Đánh giá Rủi ro Bảo mật theo ISO 27005
       </h1>
-      <RiskMatrixTable />
+
+      <RiskEvaluationPage />
+      {/* <RiskMatrixTable />
 
       <RiskForm />
+      <SystemList /> */}
     </div>
   );
 }
