@@ -51,7 +51,7 @@ const SystemList = ({
   };
 
   return (
-    <div>
+    <div className="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold mt-10 mb-4 text-gray-800 text-center">
         Thông Tin Hệ Thống
       </h2>

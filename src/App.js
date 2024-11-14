@@ -1,21 +1,17 @@
 import React from "react";
 import RiskEvaluationPage from "./RiskEvaluationPage";
-// import RiskForm from "./RiskAssessmentForm";
-// import RiskMatrixTable from "./components/RiskMatrixTable";
-// import SystemList from "./components/SystemList";
 
 function App() {
   return (
-    <div className="App bg-slate-400 h-min-[100vh]">
-      <h1 className="text-center py-5 text-xl font-bold">
-        Đánh giá Rủi ro Bảo mật theo ISO 27005
-      </h1>
-
-      <RiskEvaluationPage />
-      {/* <RiskMatrixTable />
-
-      <RiskForm />
-      <SystemList /> */}
+    <div className="App bg-gradient-to-r from-blue-400 to-slate-400 min-h-screen flex flex-col">
+      <header className="bg-white shadow-md py-5">
+        <h1 className="text-center text-3xl font-bold text-gray-800">
+          Đánh giá Rủi ro Bảo mật theo ISO 27005
+        </h1>
+      </header>
+      <main className="flex-grow p-6">
+        <RiskEvaluationPage />
+      </main>
     </div>
   );
 }

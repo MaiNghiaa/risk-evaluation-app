@@ -75,7 +75,7 @@ const RiskAssessmentForm = ({ systems, onAddRisk }) => {
   };
 
   return (
-    <div className="mt-6">
+    <div className="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold mb-4 text-gray-800 text-center">
         Đánh Giá Rủi Ro
       </h2>
