@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import RiskEvaluationPage from "./RiskEvaluationPage";
 
 function App() {
+  // Load systems and risks from localStorage on initial load
+  const [systems, setSystems] = useState(() => {
+    const savedSystems = localStorage.getItem("systems");
+    return savedSystems ? JSON.parse(savedSystems) : [];
+  });
+
+  const [risks, setRisks] = useState(() => {
+    const savedRisks = localStorage.getItem("risks");
+    return savedRisks ? JSON.parse(savedRisks) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("systems", JSON.stringify(systems));
+  }, [systems]);
+
+  useEffect(() => {
+    localStorage.setItem("risks", JSON.stringify(risks));
+  }, [risks]);
+
   return (
     <div className="App bg-gradient-to-r from-blue-400 to-slate-400 min-h-screen flex flex-col">
       <header className="bg-white shadow-md py-5">
@@ -10,7 +29,12 @@ function App() {
         </h1>
       </header>
       <main className="flex-grow p-6">
-        <RiskEvaluationPage />
+        <RiskEvaluationPage
+          systems={systems}
+          setSystems={setSystems}
+          risks={risks}
+          setRisks={setRisks}
+        />
       </main>
     </div>
   );
