@@ -2,6 +2,7 @@ import React from "react";
 
 const RiskMatrixTable = () => {
   // Định nghĩa ma trận rủi ro
+ 
   const riskMatrix = {
     rare: {
       negligible: "Low",
@@ -40,9 +41,8 @@ const RiskMatrixTable = () => {
     },
   };
 
-  // Lấy các mức độ xác suất và tác động
   const likelihoodLevels = Object.keys(riskMatrix);
-  const impactLevels = Object.keys(riskMatrix["rare"]); // Lấy các mức độ tác động từ một trong các phần tử
+  const impactLevels = Object.keys(riskMatrix["rare"]);
 
   return (
     <div className="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">

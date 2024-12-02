@@ -65,7 +65,8 @@ const RiskAssessmentForm = ({ systems, onAddRisk }) => {
       name: riskName,
       likelihood,
       impact,
-      level: riskLevel, // Gán mức độ rủi ro được đánh giá
+      level: riskLevel,
+      date: new Date(), // Gán mức độ rủi ro được đánh giá
     };
 
     console.log(risk);

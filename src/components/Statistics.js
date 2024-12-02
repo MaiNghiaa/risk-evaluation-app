@@ -9,8 +9,8 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import * as XLSX from "xlsx"; // Import thư viện xlsx
 
-// Đăng ký các thành phần của Chart.js
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -22,8 +22,7 @@ ChartJS.register(
 
 const Statistics = ({ risks }) => {
   const [heThongDuocChon, setHeThongDuocChon] = useState(null);
-
-  // Hàm chuyển đổi mức độ rủi ro thành giá trị số
+  console.log(risks);
   const chuyenDoiMucDoRuiRo = (mucDo) => {
     const mucDoMap = {
       Thấp: 1,
@@ -31,10 +30,9 @@ const Statistics = ({ risks }) => {
       Cao: 3,
       "Nguy hiểm": 4,
     };
-    return mucDoMap[mucDo] || 0; // Mặc định trả về 0 nếu không tìm thấy
+    return mucDoMap[mucDo] || 0;
   };
 
-  // Hàm nhóm dữ liệu rủi ro theo hệ thống và tính toán thống kê
   const tinhThongKeHeThong = risks.reduce((acc, risk) => {
     const tenHeThong = risk.system || "Không xác định";
     if (!acc[tenHeThong]) {
@@ -42,43 +40,66 @@ const Statistics = ({ risks }) => {
         tongSoDanhGia: 0,
         mucDoRuiRoGanNhat: risk.level,
         lichSuDanhGia: [],
+        thoigian: risk.id,
       };
     }
     acc[tenHeThong].tongSoDanhGia += 1;
     acc[tenHeThong].lichSuDanhGia.push({
-      tenRuiRo: risk.name || "Không có tên", // Hiển thị tên rủi ro nếu có
+      tenRuiRo: risk.name || "Không có tên",
       mucDo: risk.level,
       mucDoSo: chuyenDoiMucDoRuiRo(risk.level),
-      thoiGian: risk.timestamp,
+      thoiGian: risk.id,
     });
-    acc[tenHeThong].mucDoRuiRoGanNhat = risk.level; // Giả định mục nhập cuối là gần đây nhất
+    acc[tenHeThong].mucDoRuiRoGanNhat = risk.level;
     return acc;
   }, {});
 
-  // Chuyển đổi dữ liệu thống kê thành danh sách để hiển thị
   const danhSachHeThong = Object.entries(tinhThongKeHeThong).map(
     ([ten, duLieu]) => ({
       ten,
       tongSoDanhGia: duLieu.tongSoDanhGia,
       mucDoRuiRoGanNhat: duLieu.mucDoRuiRoGanNhat,
       lichSuDanhGia: duLieu.lichSuDanhGia,
+      thoiGian: duLieu.thoiGian,
     })
   );
+
+  const xuatDuLieuExcel = () => {
+    const dataForExcel = danhSachHeThong.flatMap((heThong) =>
+      heThong.lichSuDanhGia.map((entry) => ({
+        "Tên Hệ Thống": heThong.ten,
+        "Tổng Số Đánh Giá": heThong.tongSoDanhGia,
+        "Mức Rủi Ro Gần Đây Nhất": heThong.mucDoRuiRoGanNhat,
+        "Tên Rủi Ro": entry.tenRuiRo,
+        "Mức Độ Rủi Ro": entry.mucDo,
+        "Thời Gian": new Intl.DateTimeFormat("vi-VN", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        }).format(new Date(entry.thoiGian)),
+      }))
+    );
+
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.json_to_sheet(dataForExcel);
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Statistics");
+    XLSX.writeFile(workbook, "ThongKeRuiRo.xlsx");
+  };
 
   // Hàm để chọn hệ thống để xem chi tiết
   const chonHeThong = (heThong) => {
     setHeThongDuocChon(heThong);
   };
-
-  // Hàm xác định màu sắc dựa trên mức độ rủi ro
   const layMauSacTheoMucDo = (mucDo) => {
-    if (mucDo <= 1) return "rgba(75, 192, 192, 0.6)"; // Rủi ro thấp (màu xanh)
-    if (mucDo === 2) return "rgba(255, 206, 86, 0.6)"; // Rủi ro trung bình (màu vàng)
-    if (mucDo === 3) return "rgba(255, 159, 64, 0.6)"; // Rủi ro cao (màu cam)
-    if (mucDo >= 4) return "rgba(255, 99, 132, 0.6)"; // Rủi ro rất cao (màu đỏ)
-    return "rgba(201, 203, 207, 0.6)"; // Màu mặc định cho giá trị không xác định
+    if (mucDo <= 1) return "rgba(75, 192, 192, 0.6)"; // Rủi ro thấp
+    if (mucDo === 2) return "rgba(255, 206, 86, 0.6)"; // Rủi ro trung bình
+    if (mucDo === 3) return "rgba(255, 159, 64, 0.6)"; // Rủi ro cao
+    if (mucDo >= 4) return "rgba(255, 99, 132, 0.6)"; // Rủi ro rất cao
+    return "rgba(201, 203, 207, 0.6)"; // giá trị không xác định
   };
-
   return (
     <div className="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold mb-4 text-gray-800 text-center">
@@ -97,7 +118,7 @@ const Statistics = ({ risks }) => {
             data={{
               labels: heThongDuocChon.lichSuDanhGia.map(
                 (entry, index) => `Lần ${index + 1}: ${entry.tenRuiRo}`
-              ), // Hiển thị tên rủi ro trong nhãn
+              ),
               datasets: [
                 {
                   label: "Mức Độ Rủi Ro",
@@ -171,6 +192,12 @@ const Statistics = ({ risks }) => {
               ))}
             </tbody>
           </table>
+          <button
+            onClick={xuatDuLieuExcel}
+            className="px-3 py-1 bg-green-500 text-white rounded mt-4"
+          >
+            Xuất file excel
+          </button>
         </div>
       )}
     </div>
