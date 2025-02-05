@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+# PROJECT 2: Security risk assessment algorithm using risk matrix analysis
+In the context of cybersecurity becoming increasingly important, especially in DevOps systems, security risk assessment and management becomes an essential task to protect the system from potential risks. This project focuses on researching and developing a security risk assessment algorithm using risk matrix analysis, to classify and evaluate threats in DevOps systems.
+## INTRODUCTION
+### 📌 **Project objectives**
+- Build a risk assessment algorithm based on a risk matrix.
+- Test the algorithm on real or simulated data.
+- Provide appropriate solution suggestions for each type of risk.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 🔍 **Reasons for choosing the topic**
+- Quick and accurate risk assessment is essential in a DevOps environment.
+- Helps minimize the risk of system insecurity.
 
-## Available Scripts
+### 🎯 **Expected results**
+- Develop a risk level classification algorithm.
+- Display suggested solutions corresponding to each risk level.
+- High applicability, especially in security management in DevOps.
 
-In the project directory, you can run:
+### 🔧 **Main functions**
+1. **Add risk types**
+- Add risk types to the system for evaluation.
+2. **Add/Edit/Delete attack types and levels**
+- Manage the list of attack types and levels of danger.
 
-### `npm start`
+3. **Display the danger level as a table**
+- Create a table to classify the danger level according to the risk matrix.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+4. **Provide solution suggestions**
+- Provide solutions based on the risk classification results.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### ⚙️ **Implementation method**
+1. **Build an algorithm based on the risk matrix**:
+- Apply risk analysis and system security methods.
 
-### `npm test`
+2. **Test on real/simulated data**:
+- Evaluate the efficiency and accuracy of the algorithm.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. **Optimize the algorithm**:
+- Improve the classification ability and expand the application to other systems.
 
-### `npm run build`
+#### Hình ảnh minh họa
+![Screenshot](img1.png)
+![Screenshot](img2.png)
+![Screenshot](img3.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🛠️ **INSTALL**
+1. **Clone repo**:
+   ```sh
+   git clone https://github.com/MaiNghiaa/risk-evaluation-app.git
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. **Dependence**:
+   **If you already have nodejs**
+   ```sh
+   npm install
+   ```
+   **If you don't have nodejs**
+4. **RUN**
+   ```sh
+   npm run start
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## STRUCTURE
+**Risk-evaluation-app
+- public
+- src
+  - app.js
+  - components
+    - Navbar.js
+    - RiskAssessmentForm.js
+    - ...
+  - index.js
+- package.json
+- .....
 
-### `npm run eject`
+## TECH
+- Reactjs
+- TailwindCss
+- Axios
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## CONTACT
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Email:_"nghia.mt1505@gmail.com"_
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**[DEMO](https://risk-evaluation-gcebjocjv-mainghiaas-projects.vercel.app/)
